@@ -44,13 +44,13 @@ def main():
         for file in os.scandir(folder.path):
             full = np.genfromtxt(file.path, delimiter='\t')
             data = full[:, :-1]
-            labels = full[:, -1:]
+            l = full[:, -1:]
+            labels = np.zeros(np.shape(l)[0], dtype=int)
+            for i in range(np.shape(l)[0]):
+                labels[i] = int(l[i][0])
             filename = Path(file.path).stem
             names.append(filename)
-            if "spheres" in file.name:
-                fullData[file.name[:-5]] = DataEntry(data, labels, filename, 3)
-            else:
-                fullData[file.name[:-5]] = DataEntry(data, labels, filename)
+            fullData[filename] = DataEntry(data, labels, filename, dim=np.shape(data)[1])
             for key, value in num_of_clusters.items():
                 if key in filename:
                     fullData[filename].clusters_number = value

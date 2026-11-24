@@ -123,10 +123,10 @@ class DataEntry(object):
 
         return self.calculate_confusion_matrix(granule_member_labels, noise)
 
-    def measure_accuracy_const_seed(self, shape_dependent_membership, linkage='single'):
+    def measure_accuracy_const_seed(self, rng_seed, shape_dependent_membership, linkage='single'):
         result_list = []
         for n in self.granules_number:
-            fcm = FuzzyCMeans(n_clusters=n, random_state=seed, max_iter=n_iterations)
+            fcm = FuzzyCMeans(n_clusters=n, random_state=rng_seed, max_iter=n_iterations)
             hc = HierarchicalClustering(n_clusters=self.clusters_number)
 
             fcm.fit(self.data)
