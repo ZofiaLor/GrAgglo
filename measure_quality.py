@@ -40,7 +40,6 @@ def measure_metrics_repeats(folderPath, linkage, repeats, specific_file=None, sh
 
 
 def measure_metrics_const_seed(folderPath, linkage, seed, specific_file=None, shape_dependent=False):
-    linkages = {"single": "sl", "complete": "cl"}
     if specific_file is not None:
         data_to_measure = fullData.get(specific_file)
         if data_to_measure is not None:
@@ -56,9 +55,9 @@ def measure_metrics_const_seed(folderPath, linkage, seed, specific_file=None, sh
             if not os.path.exists(folderPath):
                 os.makedirs(folderPath)
             if shape_dependent:
-                accuracy_results.to_csv(folderPath + root + "_" + linkages[linkage] + "_shape_dep_accuracy.csv")
+                accuracy_results.to_csv(folderPath + root + "_" + linkage + "_shape_dep_accuracy.csv")
             else:
-                accuracy_results.to_csv(folderPath + root + "_" + linkages[linkage] + "_avg_accuracy.csv")
+                accuracy_results.to_csv(folderPath + root + "_" + linkage + "_accuracy.csv")
 
 
 def measure_strict_accuracy_recall_precision(folderPath, linkage, specific_file=None):
